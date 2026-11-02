@@ -2569,7 +2569,7 @@ TEAM:
 
 ### New proposed vertical slices
 1. **Chapter-scoped roles and actual participation data** before awarding Gems or certificates.
-2. **Gems** (working name: Kindness Gems): a separate, evidence-backed positive-action recognition track, distinct from formal volunteer marks and rank. University club executive committee makes the **only normal approval** on its web dashboard. Max three confirmed claimants, splitting a fixed Gem pool. Photos required for ordinary claims, with consent-safe exceptions.
+2. **Kindness Gems** (selected working name, 2026-11-02): a separate, evidence-backed positive-action recognition track, distinct from formal volunteer marks and rank. University club executive committee makes the **only normal approval** on its web dashboard. Max three confirmed claimants, splitting a fixed Gem pool. Photos required for ordinary claims, with consent-safe exceptions.
 3. **500-point self-service volunteer e-certificate:** volunteers request/download automatically from the app once existing verified volunteer marks reach 500. PDF states service period (first to last verified attended project), number of distinct verified attended projects, unique serial and verifiable QR. No printing, routine manual approval or Gems-based threshold substitution.
 4. **Engagement UX polish:** optional Gem collections and milestones, suitable for youth without implying low Gem balances mean a person has poor moral character.
 
