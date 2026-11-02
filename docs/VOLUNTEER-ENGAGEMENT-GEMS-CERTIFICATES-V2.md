@@ -5,6 +5,12 @@ Updated: 2026-11-02
 Scope: ZeroPlastic volunteer app (engagement) + web management platform (configuration and approvals) + shared backend.  
 Supersedes nothing in the existing marks/rank implementation until reviewed.
 
+## 0. Product name — final decision (2026-11-02)
+
+**Final application name: Zero App** (capitalisation: **Zero App**). This is the shared volunteer mobile application for ZeroPlastic Movement, Volunteers Academy and participants in partner projects. Its name is not ZeroPlastic App, ZeroGo, or RIPLIA. Use **Zero App** in UI labels, documentation, launch planning and app-store descriptions. **Kindness Gems** remains the selected working name of the positive-action recognition feature within Zero App.
+
+The brand does not create paid corporate accounts or a separate corporate application. Partner organisations are linked to projects, and individual volunteers use the same login and verified mark/certificate rules. The web-based operational management interface can be labelled **Zero App Management** in documentation until the final admin-facing display label is set. Formal trademark/app-store availability checks are separate from the founder\'s product naming decision.
+
 ## 1. Product principle
 
 The **volunteer app** is for volunteers to discover opportunities, take part, upload evidence, celebrate progress and download certificates. All catalogue configuration, operational work, approvals, exception handling and reporting live in the **web management platform**. Both use a shared API and database.
