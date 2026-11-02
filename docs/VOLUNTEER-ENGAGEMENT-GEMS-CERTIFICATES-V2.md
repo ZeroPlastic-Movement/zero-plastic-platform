@@ -16,7 +16,7 @@ Protect three distinct concepts:
 
 **Ethics / community design:** Gems reflect documented positive actions, **not** a person's moral worth or character. Never publicly label low-gem users as bad people. Avoid coercion, public shaming, manipulative scarcity or always-on leaderboards.
 
-## 2. Naming options (decision pending)
+## 2. Product naming (selected working name)
 
 | Candidate | Tone | Notes |
 | --- | --- | --- |
@@ -27,7 +27,7 @@ Protect three distinct concepts:
 | **Spark Gems** | youthful / playful | Needs short explanation |
 | **Ripple Gems** | community impact | Distinctive and works for team actions |
 
-Working UX label: **Kindness Gems**. Example: “Collect Gems by showing up for others.” Gems are evidence of actions, not a personality score.
+**Founder decision (2026-11-02): Kindness Gems is the selected working name.** Use this consistently throughout the mobile app, web administration, API descriptions and product documentation. Alternate names below are historical brainstorm options, not competing product names. Example: “Collect Gems by showing up for others.” Gems are evidence of actions, not a personality score.
 
 ## 3. Example Gem catalogue — proposals, not final awards
 
@@ -143,7 +143,7 @@ Keep the MVP focused: one quest catalogue, one university approval inbox, one Ge
 
 ## 11. Open product decisions (do not silently assume these are final)
 
-1. Confirm public-facing Gem name: Kindness Gems, Impact Gems, Ripple Gems, etc.
+1. **Resolved:** Kindness Gems selected as the working product name. Keep the user-facing activity term **Gem Quests** pending UX testing.
 2. Exact legacy volunteer marks/rank thresholds and which marks count toward 500.
 3. The **max 3 teammates** rule vs the hypothetical 5-person illustration (recommended: enforce 3).
 4. Fractional Gems display (recommended: 2 decimals; underlying exact fixed-point allocations).
@@ -165,3 +165,54 @@ Keep the MVP focused: one quest catalogue, one university approval inbox, one Ge
 - Revoked certificate no longer validates.
 - Private evidence never appears in public certificate verification.
 - All primary administrative actions are web-based.
+
+
+## 13. Refined product specification — 2026-11-02
+
+### User-facing mental model
+- **Volunteer Marks** measure verified formal service and determine the existing volunteer rank ladder. This remains unchanged.
+- **Kindness Gems** celebrate **specific verified positive actions**, not a person's worth. The app calls earning opportunities **Gem Quests**, with categories such as Learn & Share, Care & Support, Campus Connections, Community Action, and SDG Challenges.
+- The volunteer home page may show both totals side by side, always with distinct icons and descriptions. Never imply Gems can be purchased or exchanged for marks.
+- Language guidelines: "You helped someone learn" or "You completed a kindness quest", not "You are better than students with fewer Gems". No forced public rankings or penalties for not participating.
+
+### Quest lifecycle and configuration
+- Each Kindness Gem quest definition includes: slug, title, plain-language action, category, pool value, maximum teammates (1 to 3), evidence rule, eligible chapters, claim frequency, effective dates, published/unpublished status, and reviewer guidance.
+- Store the definition **version** used at submission time; later admin edits must not retroactively change submitted awards.
+- A volunteer can claim an eligible quest after carrying out the real-world action; no automated award merely for opening or clicking a quest.
+- Each claim records event date, chapter, description/outcome, evidence, confirmed teammates, review state and audit history.
+- Verification is a single chapter-level decision by an authorised executive officer who is not an award beneficiary; the system credits the ledger only after approval.
+- For a cross-campus action, record host campus and optional confirmation without requiring a second approval tier.
+
+### Balanced rollout for university communities
+Start with a modest quest catalogue of 10–15 real-world tasks. Use varied categories rather than incentivising only visible charity or environmental work. Claims should be easy enough to submit in a minute or two, but evidence and review should discourage spam. Protect beneficiaries' privacy and make sensitive-case evidence exceptions explicit.
+
+### Technical reward integrity
+- Award amounts are owned by the chapter-approved claim, not mutable directly by volunteers.
+- The Gem ledger is append-only: an approved claim creates a single transaction per beneficiary; a correction adds reversing transactions with recorded reasons rather than editing history.
+- Team membership must be confirmed before approval; the configured Gem pool is shared among up to three beneficiaries and never multiplied per member.
+- Use fixed-point precision for fractional splits. Ensure total distributable units always equal the configured pool using deterministic remainder allocation and show rounded displays clearly.
+- The same project may separately create volunteer marks **only through its existing marks rules**, with a link between source records to prevent double counting.
+
+### Self-service certificates — precise eligibility and period
+- Eligibility is based on at least 500 **verified formal volunteer marks**, excluding Kindness Gems, provisional marks and reverted awards.
+- A valid issued certificate covers the first to last **verified attended project** in the records at generation time; count distinct attended project IDs, not event invites or Gem Quests.
+- If service continues, the volunteer may regenerate when the verified attendance snapshot changes. No printed requests or ordinary staff approvals.
+- The website verification URL/QR confirms the issued snapshot without exposing evidence photos, private contact details or detailed activity logs.
+- The web platform controls the signing/template settings and handles exceptional corrections only.
+
+### App and web navigation proposal
+**Mobile:** Home | Activities | Kindness Gems | My Impact | Profile (certificate access via My Impact). Keep navigation compact and avoid management menus.
+
+**Web:** Dashboard | Projects | Volunteers | Chapters | Kindness Gems (Quest Catalogue, Approval Inbox, Ledger & Audit) | Certificates (Template, Exceptions, Verification) | Reports | Settings.
+
+### Revised MVP acceptance examples
+1. Solo quest with configured 5 Gems: after one authorised university approval, award exactly 5; retrying approval awards zero additional Gems.
+2. Three verified teammates share 5 Gems: exact total ledger allocation remains 5 even with rounded UI displays.
+3. Executive officer who participated cannot approve that claim; another authorised officer must decide.
+4. Rejected claim awards zero Gems and offers a reason; evidence is not visible publicly.
+5. An eligible volunteer with 500 verified marks and multiple verified projects obtains a unique PDF without contacting staff; 499 verified marks cannot.
+6. A student with 500 marks but no verified attended project is shown a data-quality exception; the certificate never invents participation dates.
+7. The same PDF can be downloaded again; a changed verified attendance snapshot can produce a new version with independent verification.
+
+### Next product decisions to confirm before implementation
+The Kindness Gems name is settled as the **working name**. Remain open on visibility of Gem totals to other volunteers, exact chapter executive committee permissions, quest catalogue values and cooldowns, points precision display, evidence for private acts and minors, existing rank thresholds, and certificate signing authority. Do not silently treat these as final.
