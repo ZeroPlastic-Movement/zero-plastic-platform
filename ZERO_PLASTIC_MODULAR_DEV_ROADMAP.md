@@ -2554,3 +2554,26 @@ TEAM:
 ---
 
 **Let's build Zero Plastic right. Step by step. Module by module. 🌍💚**
+
+
+---
+
+## 11. PROPOSED ENGAGEMENT V2 ADDENDUM (2026-11-02)
+
+**Status: founder-review proposal; not yet implemented.** Detailed rules, exceptions and acceptance checks live in [docs/VOLUNTEER-ENGAGEMENT-GEMS-CERTIFICATES-V2.md](docs/VOLUNTEER-ENGAGEMENT-GEMS-CERTIFICATES-V2.md).
+
+### Keep two interfaces with separate responsibilities
+- **Volunteer Flutter app:** find and join projects; check in/out; see existing marks/ranks; submit Gem activities and evidence, confirm teams, review awards; self-serve PDF certificates.
+- **React web management:** national/district/chapter operations, project setup, attendance verification, Gem catalogue configuration, chapter-level Gem approvals, and certificate template/exception controls.
+- **Shared Express/PostgreSQL backend:** access control, claims/ledger, attendance, verified marks, certificate generation and QR verification.
+
+### New proposed vertical slices
+1. **Chapter-scoped roles and actual participation data** before awarding Gems or certificates.
+2. **Kindness Gems** (selected working name, 2026-11-02): a separate, evidence-backed positive-action recognition track, distinct from formal volunteer marks and rank. University club executive committee makes the **only normal approval** on its web dashboard. Max three confirmed claimants, splitting a fixed Gem pool. Photos required for ordinary claims, with consent-safe exceptions.
+3. **500-point self-service volunteer e-certificate:** volunteers request/download automatically from the app once existing verified volunteer marks reach 500. PDF states service period (first to last verified attended project), number of distinct verified attended projects, unique serial and verifiable QR. No printing, routine manual approval or Gems-based threshold substitution.
+4. **Engagement UX polish:** optional Gem collections and milestones, suitable for youth without implying low Gem balances mean a person has poor moral character.
+
+### Revised delivery sequencing
+Backend roles/chapters + verified attendance and marks → minimal **web operational workflow** (create/approve project, verify attendance) → volunteer mobile MVP → Gem catalogue/web approvals/app claims → automatic certificate pipeline → optional enhanced engagement UI.
+
+This is a sequencing adjustment to enable administrators to publish actual activities before volunteers can participate. Do not assume the 20-week estimates or the old enhanced-schema document represent implemented modules; inspect the real code and current Prisma schema.
