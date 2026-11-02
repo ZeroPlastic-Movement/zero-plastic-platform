@@ -80,3 +80,27 @@ Use focused tests for access boundaries, GPS, virtual mark exclusion, double-awa
 **Defaults to validate before coding:** exact club membership fallback/verification states; suspension and ban authority; material edit/reapproval rules; cancellation authority, offline/GPS exceptions; 500-mark accounting source/rank thresholds; Kindness Quest referral award trigger; certificate signatories; Monday form URL and identifying project fields; evidence storage/retention; minors' safety.
 
 No application source code, migrations, UI assets or deployments are modified by this document.
+
+## 11. Critical operational requirement — mass GPS attendance (2026-11-02)
+**Founder-confirmed real-world scenario:** Up to **400 volunteers** at one physical project may all check in within **1–2 minutes** at the start, and check out together at the end. The previous app crashed during this type of burst; prevention is a release-blocking priority for Zero App.
+
+### Acceptance/performance targets (engineering proposal until validated)
+- Load-test **400 distinct volunteers within 60 seconds**, including a sharp **50 requests/second** short burst, for both GPS check-in and GPS check-out. These are testing targets, not a claim that AWS Free Tier guarantees capacity.
+- No API process crash, lost/duplicate check-ins, duplicate volunteer marks, or inconsistent checkout state. Successful requests must be durable in PostgreSQL.
+- Target >=99% successful valid attendance requests during the scripted test and p95 <2 seconds under the defined pilot infrastructure; network failures can legitimately time out, so test client safe retry and eventual reconciliation. Report measured results, not assumed compliance.
+- Test duplicate rapid taps, identical idempotency keys, concurrent repeated requests, low-accuracy GPS, out-of-geofence, late arrival, project start/end boundary, cellular disconnect/retry, and simultaneous project activity.
+
+### Implementation design
+- Single lightweight `POST /projects/:id/check-in` and `POST /projects/:id/check-out` paths: authenticate; check eligible in-person project/time; validate server-side geodesic radius against saved project coordinates and device-supplied accuracy; atomically write attendance to PostgreSQL and return authoritative result.
+- GPS remains required; **no QR code** workaround. Keep location error/permission guidance in mobile and avoid repeated GPS polling of the API.
+- Database uniqueness/transaction constraints guarantee an individual cannot create repeated active attendance records. Use idempotency keys for mobile retries. If server confirms an earlier submission but reply was lost, retry returns the existing record rather than a second credit.
+- Do not put photo upload, leaderboards, full national analytics, certificate PDF generation or large mark recalculations in the synchronous critical attendance request. Post-processing may be handled asynchronously when needed.
+- Provide visible pending state, disable repeat taps and permit safe bounded retry; only show definitive **Checked in/out** after a verified server response. Include clear recovery when the request status is unknown.
+- Web chapter/district dashboard must show real attendance counts; avoid expensive global re-count on every request. Allow audited staff corrections for genuine mobile/GPS failures without weakening default GPS policy.
+- Monitor error rate, response latency, DB connections, CPU/memory/CPU credits, retries and peak simultaneous check-ins during rehearsals.
+
+### AWS deployment caution
+A tiny/free-tier micro EC2 with PostgreSQL on the same host has **not** been proven adequate for these peak bursts, especially under burstable CPU-credit exhaustion. Benchmark the exact provisioned instance before any 400-person live event; upgrade instance size / separate DB if measured capacity fails. AWS T-family instances use CPU credits; performance can throttle or incur surplus-credit costs depending on mode. References: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-credits-baseline-concepts.html .
+
+### Agile implementation gate
+**Attendance module is not accepted until a measured 400-user check-in AND checkout simulation meets the durability and performance goals.** Keep a repeatable k6/Artillery or similar script in repo (with synthetic accounts and mockable GPS coordinates), test against a staging/pilot environment, document actual instance size and the test result in `docs/SESSION-HANDOFF.md`.
